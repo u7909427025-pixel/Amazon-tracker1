@@ -1,0 +1,25 @@
+name: Amazon Tracker H24
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Controlla automaticamente ogni 6 ore
+  workflow_dispatch: # Ti permette di avviarlo anche a mano
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il codice
+        uses: actions/checkout@v3
+
+      - name: Configura Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Installa librerie
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Esegui lo script
+        run: python Tracker.py
